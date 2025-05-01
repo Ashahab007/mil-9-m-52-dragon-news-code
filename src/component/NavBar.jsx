@@ -8,8 +8,8 @@ const NavBar = () => {
       <div className="nav-start"></div>
       <div className="nav-center flex gap-6 text-gray-400">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/">About</NavLink>
-        <NavLink to="/">Career</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/career">Career</NavLink>
       </div>
       <div className="nav-end flex gap-1">
         <img src={user} alt="user" />

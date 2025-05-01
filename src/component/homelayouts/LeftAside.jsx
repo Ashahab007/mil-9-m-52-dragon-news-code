@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import Category from "../../pages/Category";
+import Category from "../Category";
 
 const LeftAside = () => {
   return (
