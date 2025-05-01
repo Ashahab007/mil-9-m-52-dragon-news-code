@@ -17,7 +17,9 @@ const Category = () => {
         {categories.map((category) => (
           <NavLink
             key={category.id}
-            className={"btn bg-base-100 hover:bg-base-300 border-0"}
+            className={
+              "btn bg-base-100 hover:bg-base-300 border-0 text-gray-400"
+            }
             to={`/category/${category.id}`}
           >
             {category.name}
