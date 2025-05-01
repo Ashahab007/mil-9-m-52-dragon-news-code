@@ -3,7 +3,8 @@ import React from "react";
 const SocialMedia = () => {
   return (
     <div>
-      <div className="flex flex-col gap-2">
+      <h4 className="font-bold">Login With</h4>
+      <div className="flex flex-col gap-2 mt-2">
         <button className="btn bg-white text-black border-[#e5e5e5] text-[6px] sm:text-xs">
           <svg
             aria-label="Google logo"

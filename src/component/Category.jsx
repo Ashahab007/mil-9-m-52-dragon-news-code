@@ -12,7 +12,7 @@ const Category = () => {
 
   return (
     <div>
-      <h3 className="font-bold">All Categories</h3>
+      <h3 className="font-bold">All Categories ({categories.length})</h3>
       <div className="grid grid-cols-1 gap-2 mt-4">
         {categories.map((category) => (
           <NavLink
