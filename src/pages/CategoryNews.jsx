@@ -23,9 +23,7 @@ const CategoryNews = () => {
       setCategoryNews(breakingNews);
       console.log(breakingNews);
     } else {
-      const filteredNews = data.filter(
-        (category) => id == category.category_id
-      );
+      const filteredNews = data.filter((news) => id == news.category_id);
       setCategoryNews(filteredNews);
       console.log(filteredNews);
     }
