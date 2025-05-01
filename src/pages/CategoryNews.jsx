@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import Category from "../component/Category";
+import NewsCard from "../component/NewsCard";
 
 const CategoryNews = () => {
   const [categoryNews, setCategoryNews] = useState([]);
@@ -29,7 +30,19 @@ const CategoryNews = () => {
     }
   }, [data, id]);
 
-  return <div>Total news found {categoryNews.length} news </div>;
+  return (
+    <div>
+      <h3 className="font-bold">
+        Total news found{" "}
+        <span className="text-red-500">{categoryNews.length}</span> news{" "}
+      </h3>
+      {categoryNews.map((news) => (
+        <Suspense fallback={"Loading . . ."}>
+          <NewsCard news={news}></NewsCard>
+        </Suspense>
+      ))}
+    </div>
+  );
 };
 
 export default CategoryNews;
