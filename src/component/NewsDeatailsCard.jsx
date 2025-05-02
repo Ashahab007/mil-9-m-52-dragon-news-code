@@ -23,7 +23,7 @@ const NewsDetailsCard = ({ id }) => {
       <img src={news.image_url} />
       <h3 className="font-bold text-2xl">{news.title}</h3>
       <p>{news.details}</p>
-      {/* 1.12 go back to that specific category news */}
+      {/* 1.12 go back to that specific category news upon click*/}
       <Link to={`/category/${news.category_id}`} className="btn btn-secondary">
         All news in this category
       </Link>
