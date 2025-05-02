@@ -3,8 +3,12 @@ import { format } from "date-fns";
 import React from "react";
 import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
+import { Link } from "react-router";
 
+// 1.0 My requirement is upon clicking on the read more button it will show the news details
 const NewsCard = ({ news }) => {
+  console.log(news);
+
   console.log(format(parseISO("2025-04-22T16:45:00.000Z"), "MMMM d, yyyy"));
 
   return (
@@ -48,18 +52,20 @@ const NewsCard = ({ news }) => {
           {news?.details.slice(0, 250)}...
         </p>
 
-        <button className="text-orange-500 font-semibold text-sm mt-2">
+        <Link
+          // 1.2 created dynamic id to show the news
+          to={`/news-details/${news.id}`}
+          className="text-orange-500 font-semibold text-sm mt-2 underline"
+        >
           Read More
-        </button>
+        </Link>
         <hr className="border-b border-gray-200 mt-4" />
         {/* Footer */}
         <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
           <div className="flex items-center gap-1 text-orange-400">
-            {/* <Star fill="currentColor" className="w-4 h-4" /> */}
             <span>{news?.rating.number}</span>
           </div>
           <div className="flex items-center gap-1">
-            {/* <Eye className="w-4 h-4" /> */}
             <span className="flex items-center gap-2">
               <FaRegEye></FaRegEye> {news?.total_view}
             </span>

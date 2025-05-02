@@ -2,7 +2,6 @@ import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import userIcon from "../assets/user.png";
 import { AuthContext } from "../provider/AuthProvider";
-import button from "daisyui/components/button";
 
 const NavBar = () => {
   const { user, logOut } = use(AuthContext);
