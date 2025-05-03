@@ -11,7 +11,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  // 3.0 but there is a problem in after login with 2.0 method, user can access the news details but if in news detail page reload it will go to the login page. thats why apply a loading state to solve this afterss loading problem. and set the initial loading value is true. Because when user is not found it will show loading after found the user loading will be stopped.
+  // 3.0 but there is a problem in after login with 2.0 method, user can access the news details but if in news detail page reload it will go to the login page. thats why apply a loading state to solve this after loading problem. and set the initial loading value is true. Because when user is not found it will show loading after found the user loading will be stopped.
 
   const [loading, setLoading] = useState(true);
 

@@ -1,12 +1,18 @@
 import React, { use } from "react";
 import { AuthContext } from "./AuthProvider";
-import { Navigate } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import Loading from "../pages/Loading";
+
+// 4.0 my requirement is when user is logged in with read more clicking it will stay in login page with successfully login. but we want to render it in specific news page.
 
 // 2.0 my Requirement is if user is logged in user can go to news details page but if the user is no logged in user, when clicking the read more button user will redirect to the login page
 
 // 2.1 created a Private Route which can take a default parameter children and as we need the user data from AuthProvider so user parameter is taken
 const PrivateRouter = ({ children }) => {
+  // 4.1 use useLocation
+  const location = useLocation();
+  console.log(location); //{pathname: '/news-details/bcdef0123456789abcdef01234', search: '', hash: '', state: null, key: 'to349j80'}
+
   // 2.2 get the user data by use(AuthContext) and destructure it
   //   3.3 get loading by use(AuthContext) and destructure it
   const { user, loading } = use(AuthContext);
@@ -24,7 +30,9 @@ const PrivateRouter = ({ children }) => {
   if (user) {
     return children;
   }
-  return <Navigate to="/auth/login"></Navigate>;
+
+  //   4.2 set in state location.pathname
+  return <Navigate state={location.pathname} to="/auth/login"></Navigate>;
 };
 
 export default PrivateRouter;

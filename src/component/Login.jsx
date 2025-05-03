@@ -1,8 +1,15 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  // 4.3 as we have send the location.pathname from 4.2. Now to get the state using useLocation here
+  const location = useLocation();
+  console.log(location);
+
+  // 4.4 now we use useNavigate to render specific page upon location condition
+  const navigate = useNavigate();
+
   const { logIn } = use(AuthContext);
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -14,6 +21,8 @@ const Login = () => {
         const user = userCredential.user;
         alert("User Logged in successfully");
         console.log(user);
+        // 4.5 if location.state value is exist or not will render two different page. It will also solve the problem after login page rendering from home
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         const errorCode = error.code;
