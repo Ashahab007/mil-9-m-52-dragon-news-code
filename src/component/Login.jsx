@@ -1,16 +1,22 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
+
+// 5.0 my requirement is showing error if password incorrect
 
 const Login = () => {
   // 4.3 as we have send the location.pathname from 4.2. Now to get the state using useLocation here
   const location = useLocation();
   console.log(location);
 
+  // 5.1 set an error state
+  const [error, setError] = useState("");
+
   // 4.4 now we use useNavigate to render specific page upon location condition
   const navigate = useNavigate();
 
   const { logIn } = use(AuthContext);
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -25,9 +31,11 @@ const Login = () => {
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
+        // 5.2 set the error message
+        setError(errorMessage);
       });
   };
   return (
@@ -83,7 +91,8 @@ const Login = () => {
             </button>
           </div>
         </div>
-
+        {/* 5.3 use condition to show the error in ui*/}
+        {error ? <p className="text-red-500"> {error}</p> : ""}
         <button
           type="submit"
           className="w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 mt-6"

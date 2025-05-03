@@ -1,10 +1,12 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
+// 6.0 showing error in register for name
 const Register = () => {
   const { createUser, setUser } = use(AuthContext);
+  const [nameError, setNameError] = useState("");
   const handleSignUp = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -12,6 +14,14 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log({ name, photoUrl, email, password });
+
+    // 6.1 set the error condition
+    if (name.length < 3) {
+      setNameError("Name must be more than 3 letters");
+      return;
+    } else {
+      setNameError("");
+    }
 
     createUser(email, password)
       .then((result) => {
@@ -21,8 +31,8 @@ const Register = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
+        // const errorMessage = error.message;
+        alert(errorCode);
         // ..
       });
   };
@@ -43,6 +53,7 @@ const Register = () => {
             name="name"
             placeholder="Enter your name"
             className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            required
           />
         </div>
         {/* Photo */}
@@ -67,6 +78,7 @@ const Register = () => {
             name="email"
             placeholder="Enter your email address"
             className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            required
           />
         </div>
         {/* Password */}
@@ -79,6 +91,7 @@ const Register = () => {
             name="password"
             placeholder="Enter your password"
             className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            required
           />
         </div>
 
@@ -96,7 +109,7 @@ const Register = () => {
             Accept Terms & Conditions
           </label>
         </div>
-
+        {nameError ? <p className="text-red-500 text-xs">{nameError}</p> : ""}
         <button
           type="submit"
           className="w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 mt-6"
