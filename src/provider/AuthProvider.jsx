@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -33,6 +34,11 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // 7.0 update user profile so take a function updateUser. as from documentation it takes an object so passed and object
+  const updateUser = (updateData) => {
+    return updateProfile(auth.currentUser, updateData);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -53,6 +59,8 @@ const AuthProvider = ({ children }) => {
     // 3.2 pass the loading and setLoading
     loading,
     setLoading,
+    // 7.1 passed the updateUser
+    updateUser,
   };
   return <AuthContext value={obj}>{children}</AuthContext>;
 };

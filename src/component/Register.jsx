@@ -1,12 +1,15 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 // 6.0 showing error in register for name
+// 7.2 received with use(AuthContext)
 const Register = () => {
-  const { createUser, setUser } = use(AuthContext);
+  const { createUser, setUser, updateUser } = use(AuthContext);
   const [nameError, setNameError] = useState("");
+
+  const navigate = useNavigate();
   const handleSignUp = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -26,7 +29,21 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        setUser(user);
+        // setUser(user); commented due to applying updateUser function
+
+        // 7.3 as the user data will be updated during registration so updateUser function will be call here which takes a parameter as an object from documentation
+        updateUser({ displayName: name, photoURL: photoUrl })
+          // 7.4 as we previously used the user in setUser which is commented on line 30. Now we need the both data user and the displayName: name, photoURL: photoUrl. so copy the user in setUser with displayName: name, photoURL: photoUrl .
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photoUrl });
+            navigate("/");
+          })
+
+          .catch((error) => {
+            console.log(error);
+            // 7.5 here setUser(user) is used if the user is not logged in it will show the default icon in navbar
+            setUser(user);
+          });
         console.log(user);
       })
       .catch((error) => {
