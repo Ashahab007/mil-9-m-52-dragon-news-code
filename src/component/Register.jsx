@@ -16,7 +16,7 @@ const Register = () => {
     const photoUrl = e.target.photoUrl.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log({ name, photoUrl, email, password });
+    console.log(name, photoUrl, email, password);
 
     // 6.1 set the error condition
     if (name.length < 3) {
@@ -37,6 +37,7 @@ const Register = () => {
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photoUrl });
             navigate("/");
+            console.log(user);
           })
 
           .catch((error) => {

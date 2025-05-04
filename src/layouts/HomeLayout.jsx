@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Outlet } from "react-router";
 import Header from "../component/Header";
 import Latest from "../component/Latest";
 import NavBar from "../component/NavBar";
 import LeftAside from "../component/homelayouts/LeftAside";
 import RightAside from "../component/homelayouts/RightAside";
+import Loading from "../pages/Loading";
 
 const HomeLayout = () => {
   return (
@@ -23,7 +24,9 @@ const HomeLayout = () => {
           <LeftAside></LeftAside>
         </aside>
         <section className="main col-span-6">
-          <Outlet></Outlet>
+          <Suspense fallback={<Loading></Loading>}>
+            <Outlet></Outlet>
+          </Suspense>
         </section>
         <aside className="col-span-3 sticky top-0 h-fit">
           <RightAside></RightAside>

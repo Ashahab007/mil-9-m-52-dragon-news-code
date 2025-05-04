@@ -6,7 +6,8 @@ import { AuthContext } from "../provider/AuthProvider";
 const NavBar = () => {
   const { user, logOut } = use(AuthContext);
   console.log(user?.email);
-  console.log(user?.photoUrl);
+  console.log(user?.photoURL);
+  console.log(user);
 
   const handleLogOut = () => {
     console.log("logged out");
@@ -27,9 +28,9 @@ const NavBar = () => {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/career">Career</NavLink>
       </div>
-      <div className="nav-end flex gap-1">
+      <div className="nav-end flex items-center gap-1">
         {/* 7.6 now show the user picture */}
-        <img src={`${user ? user.photoUrl : userIcon}`} alt="user" />
+        <img src={`${user ? user.photoURL : userIcon}`} alt="user" />
         {user ? (
           <button
             onClick={handleLogOut}
