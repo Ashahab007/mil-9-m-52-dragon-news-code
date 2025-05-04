@@ -30,7 +30,7 @@ const PrivateRouter = ({ children }) => {
   if (user) {
     return children;
   }
-
+  // 2.5 else it will render to the login page
   //   4.2 set in state location.pathname
   return <Navigate state={location.pathname} to="/auth/login"></Navigate>;
 };
