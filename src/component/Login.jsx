@@ -5,7 +5,7 @@ import { AuthContext } from "../provider/AuthProvider";
 // 5.0 my requirement is showing error if password incorrect
 
 const Login = () => {
-  // 4.3 as we have set the location.pathname in 4.2. Now another useLocation() is set which is set to rendered in 4.2 and get the state
+  // 4.3 as we have set the location.pathname in 4.2. Now another useLocation() is set which is set to rendered in 4.2 and get the state value
   const location = useLocation();
   console.log(location);
 
